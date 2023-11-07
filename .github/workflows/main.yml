@@ -11,16 +11,16 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Run Docker Compose
-      run: |
-        docker compose up -d --remove-orphans
+      uses: actions/checkout@v3
 
     - name: Setup .NET 7
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '7.0.x'
+
+    - name: Run Docker Compose
+      run: |
+        docker compose up -d --remove-orphans
 
     - name: Wait for Cosmos DB to be ready
       run: |
