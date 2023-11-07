@@ -20,8 +20,8 @@ jobs:
       run: |
         docker compose up -d
 
-    - name: Sleep for 30 seconds
-      run: sleep 30s
+    - name: Sleep for 10 seconds
+      run: sleep 10s
       shell: bash
 
     - name: Setup .NET 7
@@ -31,7 +31,7 @@ jobs:
 
     - name: Install Cosmos Certificate
       run: |
-        curl -k https://localhost:8081/_explorer/emulator.pem > ~/emulatorcert.crt
+        curl -k https://127.0.0.1:8081/_explorer/emulator.pem > ~/emulatorcert.crt
         sudo cp ~/emulatorcert.crt /usr/local/share/ca-certificates/
         sudo update-ca-certificates
 
