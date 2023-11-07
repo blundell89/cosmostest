@@ -15,7 +15,7 @@ jobs:
 
     - name: Run Docker Compose
       run: |
-        docker-compose up -d
+        docker compose up -d
 
     - name: Setup .NET 7
       uses: actions/setup-dotnet@v1
