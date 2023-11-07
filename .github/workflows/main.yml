@@ -13,19 +13,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Setup .NET 7
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '7.0.x'
-
     - name: Run Docker Compose
       run: |
         docker compose up -d --remove-orphans
 
-    - name: Wait for Cosmos DB to be ready
-      run: |
-        while ! curl -k https://localhost:8081/_explorer/emulator.pem; do docker ps; sleep 5; done
-
+    - name: Setup .NET 7
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '7.0.x'
 
     - name: Install Cosmos Certificate
       run: |
@@ -35,3 +30,9 @@ jobs:
 
     - name: Test
       run: dotnet test
+
+    - name: Tidy up
+      if: always()
+      run: |
+        docker compose logs
+        docker compose down
